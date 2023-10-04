@@ -19,6 +19,10 @@ class Meal
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Description = null;
 
+    #[ORM\ManyToOne(inversedBy: 'category')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Kitchen $kitchen = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Meal
     public function setDescription(?string $Description): static
     {
         $this->Description = $Description;
+
+        return $this;
+    }
+
+    public function getKitchen(): ?Kitchen
+    {
+        return $this->kitchen;
+    }
+
+    public function setKitchen(?Kitchen $kitchen): static
+    {
+        $this->kitchen = $kitchen;
 
         return $this;
     }
