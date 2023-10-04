@@ -34,12 +34,12 @@ class Kitchen
         return $this->id;
     }
 
-    public function getMealName(): ?string
+    public function getKitchenName(): ?string
     {
         return $this->Meal_name;
     }
 
-    public function setMealName(string $Meal_name): static
+    public function setKitchenName(string $Meal_name): static
     {
         $this->Meal_name = $Meal_name;
 
