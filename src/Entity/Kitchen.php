@@ -21,6 +21,9 @@ class Kitchen
     #[ORM\OneToMany(mappedBy: 'kitchen', targetEntity: Meal::class)]
     private Collection $category;
 
+    #[ORM\OneToOne(mappedBy: 'category', cascade: ['persist', 'remove'])]
+    private ?Member $member = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -69,6 +72,28 @@ class Kitchen
                 $category->setKitchen(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMember(): ?Member
+    {
+        return $this->member;
+    }
+
+    public function setMember(?Member $member): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($member === null && $this->member !== null) {
+            $this->member->setCategory(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($member !== null && $member->getCategory() !== $this) {
+            $member->setCategory($this);
+        }
+
+        $this->member = $member;
 
         return $this;
     }
