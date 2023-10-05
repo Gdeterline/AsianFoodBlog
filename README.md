@@ -4,6 +4,8 @@ School Project in PHP
 
 There shouldn't be any problems to solve. The website works. Follow the routes shown afterwards to access stuff.
 
+[color=#FF0000]Important : pour lancer le serveur, bien penser à éxecuter la cmd **cd ./AsianFoodBlog**[/color]
+
 Reminder : run "symfony server:start" in order to access the website using the following URL : http://127.0.0.1:8000
 
 # Entities
