@@ -22,5 +22,29 @@ School Project in PHP
 
 kitchen(1) — (0..n)meal : OneToMany
 
+## Controllers
+
+- KitchenController
+- DashboardController
+
+## CrudControllers
+
+- KitchenCrudController
+- MealCrudController
+
+## Routes 
+
+- To access main page :
+    http://127.0.0.1:8000
+
+- To access EasyAdmin :
+    http://127.0.0.1:8000/admin
+
+- To access KitchenController page :
+    http://127.0.0.1:8000/kitchen
+
+- To access Inventory list :
+    http://127.0.0.1:8000/kitchen/list
+
 
 
