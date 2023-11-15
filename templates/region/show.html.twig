@@ -4,13 +4,13 @@
 
 {% block body %}
     <h1>Region Details</h1>
-    <p>Name: {{ region.name }}</p>
+    <p>Description: {{ region.description }}</p>
 
     <h2>Public Meals</h2>
     <ul>
-        {% for publicMeal in publicMeals %}
+        {% for publicMeal in region.getRelationObject() %}
             <li>
-                {{ publicMeal.name }}
+                {{ publicMeal.Name }}
                 <a href="{{ path('app_region_meal_show', {'regionId': region.id, 'mealId': publicMeal.id}) }}">View Details</a>
             </li>
         {% endfor %}

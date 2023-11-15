@@ -21,6 +21,19 @@ class MemberRepository extends ServiceEntityRepository
         parent::__construct($registry, Member::class);
     }
 
+    public function findRegionsByMemberId($memberId)
+    {
+        return $this->createQueryBuilder('m')
+            ->select('r')
+            ->join('m.regions', 'r')
+            ->where('m.id = :memberId')
+            ->setParameter('memberId', $memberId)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
 //    /**
 //     * @return Member[] Returns an array of Member objects
 //     */

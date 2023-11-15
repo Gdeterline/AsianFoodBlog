@@ -48,17 +48,19 @@ class RegionController extends AbstractController
     #[Route('/region/{id}', name: 'app_region_show', methods: ['GET'])]
     public function show(Region $region): Response
     {
+        $publicMeals = $region->getRelationObject();
         return $this->render('region/show.html.twig', [
             'region' => $region,
+            'publicMeals' => $publicMeals,
         ]);
     }
 
-    
+    /*
 
     #[Route('/region/{regionId}/meal/{mealId}', name: 'app_region_meal_show')]
     public function showMeal(Region $region, Meal $meal): Response
     {
-        // Vous pouvez ici récupérer la galerie associée à cet objet, si nécessaire.
+       
         $gallery = $meal->getRegions();
 
         return $this->render('region/meal_show.html.twig', [
@@ -68,7 +70,7 @@ class RegionController extends AbstractController
         ]);
     }
 
-    
+    */
 
     #[Route('/region/{id}', name: 'app_region_show')]
     public function showRegion(Region $region): Response
@@ -110,7 +112,7 @@ class RegionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_region_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_region_index', ['region_id' => $region->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('region/edit.html.twig', [

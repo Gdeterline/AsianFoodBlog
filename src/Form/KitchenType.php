@@ -10,12 +10,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class KitchenType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('name')
-            ->add('category')
-        ;
-    }
+        {
+                $builder
+                        ->add('description')
+                        ->add('owner', null, [
+                                'disabled'   => true,
+                        ])
+                ;
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

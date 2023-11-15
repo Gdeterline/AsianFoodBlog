@@ -10,4 +10,12 @@
     <a href="{{ path('app_region_index') }}">back to list</a>
 
     {{ include('region/_delete_form.html.twig') }}
+
+    {# Afficher les repas associés à la région #}
+    <h2>Meals in this Region</h2>
+    <ul>
+        {% for meal in region.getRelationObject() %}
+            <li>{{ meal.getName() }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

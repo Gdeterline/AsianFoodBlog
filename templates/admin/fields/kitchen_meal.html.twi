@@ -1,4 +1,6 @@
-{# admin/fields/kitchen_meal.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <ul>
     {% for meal in field.value %}
         {%- set url = ea_url()
@@ -15,3 +17,4 @@
         <span class="badge badge-secondary">None</span>
     {% endfor %}
 </ul>
+{% endblock %}

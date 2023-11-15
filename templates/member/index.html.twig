@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{% block body %}
 <h1>Liste des Membres</h1>
 <ul>
     {% for member in members %}
@@ -8,4 +9,4 @@
         </li>
     {% endfor %}
 </ul>
-
+{% endblock %}

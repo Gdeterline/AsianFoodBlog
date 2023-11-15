@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
-<h1>Fiche Membre</h1>
-<p>Nom: {{ member.name }}</p>
-<p>Email: {{ member.email }}</p>
+{% block body %}
 
-<h2>Inventaires</h2>
+<h1>Fiche Membre</h1>
+<p>Name : {{ member.name }}</p>
+
+<h2>Regions in your kitchen</h2>
 <ul>
-    {% for inventory in member.inventories %}
+    {% for region in member.regions %}
         <li>
-            <a href="{{ path('app_inventory_show', {'id': inventory.id}) }}">{{ inventory.name }}</a>
+            <a href="{{ path('app_region_show', {'id': region.id}) }}">{{ region.name }}</a>
         </li>
     {% endfor %}
 </ul>
+
+{% endblock %}

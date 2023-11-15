@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Member;
 
 class KitchenController extends AbstractController
 {
@@ -22,24 +23,16 @@ class KitchenController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_kitchen_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/kitchen/new/{id}', name: 'app_kitchen_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, KitchenRepository $kitchenRepository, Member $member): Response
     {
         $kitchen = new Kitchen();
+        $kitchen->setOwner($member);
         $form = $this->createForm(KitchenType::class, $kitchen);
         $form->handleRequest($request);
     
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($kitchen);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('app_kitchen_index', [], Response::HTTP_SEE_OTHER);
-        }
-    
-        return $this->render('kitchen/new.html.twig', [
-            'kitchen' => $kitchen,
-            'form' => $form->createView(),
-        ]);
+       
+        return $this->redirectToRoute('app_kitchen_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/kitchen/list', name: 'kitchen_index', methods: ['GET'])]
