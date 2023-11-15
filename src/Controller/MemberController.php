@@ -9,17 +9,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MemberController extends AbstractController
 {
-    #[Route('/', name: 'app_member_index', methods: ['GET'])]
+    #[Route('/member', name: 'app_member_index')]
     public function index(): Response
     {
-        $members = $this->getDoctrine()->getRepository(Member::class)->findAll();
-
         return $this->render('member/index.html.twig', [
-            'members' => $members,
+            'controller_name' => 'MemberController',
         ]);
     }
 
-    #[Route('/{id}', name: 'app_member_show', methods: ['GET'])]
+    #[Route('/member/{id}', name: 'app_member_show', methods: ['GET'])]
     public function show(Member $member): Response
     {
         return $this->render('member/show.html.twig', [

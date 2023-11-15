@@ -14,10 +14,10 @@ use App\Entity\Meal;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 
-#[Route('/region')]
+
 class RegionController extends AbstractController
 {
-    #[Route('/', name: 'app_region_index', methods: ['GET'])]
+    #[Route('/region', name: 'app_region_index', methods: ['GET'])]
     public function index(RegionRepository $regionRepository): Response
     {
         return $this->render('region/index.html.twig', [
@@ -25,7 +25,7 @@ class RegionController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_region_new', methods: ['GET', 'POST'])]
+    #[Route('/region/new', name: 'app_region_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $region = new Region();
@@ -45,13 +45,15 @@ class RegionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_region_show', methods: ['GET'])]
+    #[Route('/region/{id}', name: 'app_region_show', methods: ['GET'])]
     public function show(Region $region): Response
     {
         return $this->render('region/show.html.twig', [
             'region' => $region,
         ]);
     }
+
+    
 
     #[Route('/region/{regionId}/meal/{mealId}', name: 'app_region_meal_show')]
     public function showMeal(Region $region, Meal $meal): Response
@@ -66,16 +68,20 @@ class RegionController extends AbstractController
         ]);
     }
 
+    
+
     #[Route('/region/{id}', name: 'app_region_show')]
     public function showRegion(Region $region): Response
     {
-        $publicMeals = $region->getRelationObject();
+        //$publicMeals = $region->getRelationObject();
 
         return $this->render('region/show.html.twig', [
             'region' => $region,
-            'publicMeals' => $publicMeals,
+            //'publicMeals' => $publicMeals,
         ]);
     }
+
+    
 
     #[Route('/{region_id}/meal/{meal_id}', methods: ['GET'], name: 'app_region_meal_show')]
 
@@ -95,7 +101,7 @@ class RegionController extends AbstractController
               ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_region_edit', methods: ['GET', 'POST'])]
+    #[Route('/region/{id}/edit', name: 'app_region_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Region $region, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RegionType::class, $region);
@@ -113,7 +119,7 @@ class RegionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_region_delete', methods: ['POST'])]
+    #[Route('/region/{id}', name: 'app_region_delete', methods: ['POST'])]
     public function delete(Request $request, Region $region, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$region->getId(), $request->request->get('_token'))) {
@@ -123,4 +129,7 @@ class RegionController extends AbstractController
 
         return $this->redirectToRoute('app_region_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
+
 }
