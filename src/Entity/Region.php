@@ -66,7 +66,7 @@ class Region
         return $this->relation;
     }
 
-    public function setRelation(?Member $relation): static
+    public function setRelation(?Member $relation): self
     {
         $this->relation = $relation;
 

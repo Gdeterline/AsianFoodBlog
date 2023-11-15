@@ -14,7 +14,9 @@ class RegionType extends AbstractType
         $builder
             ->add('description')
             ->add('published')
-            ->add('relation')
+            ->add('relation', null, [
+                'disabled' => true,
+            ])
             ->add('relation_object')
         ;
     }

@@ -39,6 +39,7 @@ class KitchenController extends AbstractController
     public function listAction(KitchenRepository $KitchenRepository)
     {
         $htmlpage = '<!DOCTYPE html>
+        
 <html>
     <head>
         <meta charset="UTF-8">

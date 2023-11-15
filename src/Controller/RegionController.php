@@ -6,11 +6,13 @@ use App\Entity\Region;
 use App\Form\RegionType;
 use App\Repository\RegionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Meal;
+use App\Entity\Member;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 
@@ -20,15 +22,21 @@ class RegionController extends AbstractController
     #[Route('/region', name: 'app_region_index', methods: ['GET'])]
     public function index(RegionRepository $regionRepository): Response
     {
+
         return $this->render('region/index.html.twig', [
             'regions' => $regionRepository->findAll(),
         ]);
     }
 
-    #[Route('/region/new', name: 'app_region_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('/region/new/{memberId}', name: 'app_region_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, $memberId): Response
+    {   
+    
+        $member = $entityManager->getRepository(Member::class)->find($memberId);
         $region = new Region();
+        $region->setRelation($member);
+        
+
         $form = $this->createForm(RegionType::class, $region);
         $form->handleRequest($request);
 
@@ -36,12 +44,13 @@ class RegionController extends AbstractController
             $entityManager->persist($region);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_region_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_region_index', ['memberId' => $memberId], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('region/new.html.twig', [
             'region' => $region,
             'form' => $form,
+            'memberId' => $member->getId(),
         ]);
     }
 
