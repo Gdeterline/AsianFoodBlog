@@ -1,7 +1,0 @@
-bootstrap_menu:
-  menus:
-    main:
-      items:
-        admin:
-            label: 'EasyAdmin'
-            route: 'admin'
