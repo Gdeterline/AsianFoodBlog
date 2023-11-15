@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Kitchen;
 use App\Entity\Meal;
 use App\Entity\Member;
+use App\Entity\Region;
 
 class AppFixtures extends Fixture
 {
@@ -38,14 +39,27 @@ class AppFixtures extends Fixture
 
         // Create some test members
         $member1 = new Member();
+        $member1->setName('Member 1');
         $member1->setRelation('Relation 1');
         $member1->setCategory($kitchen1);
         $manager->persist($member1);
 
         $member2 = new Member();
+        $member2->setName('Member 2');
         $member2->setRelation('Relation 2');
         $member2->setCategory($kitchen2);
         $manager->persist($member2);
+
+        // Create some test regions
+        $region1 = new Region();
+        $region1->setDescription('China');
+        $region1->setPublished(true);
+        $manager->persist($region1);
+
+        $region2 = new Region();
+        $region2->setDescription('Vietnam');
+        $region2->setPublished(true);
+        $manager->persist($region2);
 
         // Flush the changes to the database
         $manager->flush();

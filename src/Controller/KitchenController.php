@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Kitchen;
+use Symfony\Component\HttpFoundation\Request;
 use App\Repository\KitchenRepository;
+use App\Form\KitchenType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 class KitchenController extends AbstractController
 {
@@ -16,6 +19,26 @@ class KitchenController extends AbstractController
     {
         return $this->render('kitchen/index.html.twig', [
             'controller_name' => 'KitchenController',
+        ]);
+    }
+
+    #[Route('/new', name: 'app_kitchen_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $kitchen = new Kitchen();
+        $form = $this->createForm(KitchenType::class, $kitchen);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($kitchen);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('app_kitchen_index', [], Response::HTTP_SEE_OTHER);
+        }
+    
+        return $this->render('kitchen/new.html.twig', [
+            'kitchen' => $kitchen,
+            'form' => $form->createView(),
         ]);
     }
 

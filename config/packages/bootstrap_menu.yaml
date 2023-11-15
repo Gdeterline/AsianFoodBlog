@@ -1,0 +1,6 @@
+bootstrap_menu:
+    menus:
+        main:
+            items:
+                - { route: 'inventory_list', label: 'Inventories' }
+                - { route: 'app_member_list', label: 'Members' }

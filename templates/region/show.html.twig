@@ -1,0 +1,20 @@
+{# templates/region/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Region Details{% endblock %}
+
+{% block body %}
+    <h1>Region Details</h1>
+    <p>Name: {{ region.name }}</p>
+
+    <h2>Public Meals</h2>
+    <ul>
+        {% for publicMeal in publicMeals %}
+            <li>
+                {{ publicMeal.name }}
+                <a href="{{ path('app_region_meal_show', {'regionId': region.id, 'mealId': publicMeal.id}) }}">View Details</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
