@@ -16,7 +16,7 @@ class Member
     #[ORM\Column(length: 255)]
     private ?string $relation = null;
 
-    #[ORM\OneToOne(inversedBy: 'member', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'member',targetEntity:Kitchen::class, cascade: ['persist', 'remove'])]
     private ?Kitchen $category = null;
 
     public function getId(): ?int

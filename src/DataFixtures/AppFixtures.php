@@ -1,17 +1,54 @@
 <?php
 
+// src/DataFixtures/AppFixtures.php
+
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\Kitchen;
+use App\Entity\Meal;
+use App\Entity\Member;
 
 class AppFixtures extends Fixture
 {
-    public function load(ObjectManager $manager): void
+    public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        // Create some test kitchens
+        $kitchen1 = new Kitchen();
+        $kitchen1->setName('Kitchen 1');
+        $manager->persist($kitchen1);
 
+        $kitchen2 = new Kitchen();
+        $kitchen2->setName('Kitchen 2');
+        $manager->persist($kitchen2);
+
+        // Create some test meals
+        $meal1 = new Meal();
+        $meal1->setName('Meal 1');
+        $meal1->setDescription('Description for Meal 1');
+        $meal1->setKitchen($kitchen1);
+        $manager->persist($meal1);
+
+        $meal2 = new Meal();
+        $meal2->setName('Meal 2');
+        $meal2->setDescription('Description for Meal 2');
+        $meal2->setKitchen($kitchen2);
+        $manager->persist($meal2);
+
+        // Create some test members
+        $member1 = new Member();
+        $member1->setRelation('Relation 1');
+        $member1->setCategory($kitchen1);
+        $manager->persist($member1);
+
+        $member2 = new Member();
+        $member2->setRelation('Relation 2');
+        $member2->setCategory($kitchen2);
+        $manager->persist($member2);
+
+        // Flush the changes to the database
         $manager->flush();
     }
 }
+

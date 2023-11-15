@@ -1,0 +1,17 @@
+{# admin/fields/kitchen_meal.html.twig #}
+<ul>
+    {% for meal in field.value %}
+        {%- set url = ea_url()
+            .setController('App\\Controller\\Admin\\MealCrudController')
+            .setAction('detail')
+            .setEntityId(meal.id)
+        -%}
+        <li>
+            <a href="{{ url }}">
+                {{ meal }}
+            </a>
+        </li>
+    {% else %}
+        <span class="badge badge-secondary">None</span>
+    {% endfor %}
+</ul>

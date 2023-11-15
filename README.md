@@ -18,7 +18,7 @@ Reminder : run "symfony server:start" in order to access the website using the f
 
 | Title | Type | Constraint | Comments |
 |:---------:|:-----------:|:----------:|:--------:|
-| Meal_name | String | notnull | |
+| name | String | notnull | |
 
 ## meal properties
 
@@ -51,8 +51,9 @@ kitchen(1) — (0..n)meal : OneToMany
 - To access KitchenController page :
     http://127.0.0.1:8000/kitchen
 
-- To access Inventory list :
+- To access Kitchen list :
     http://127.0.0.1:8000/kitchen/list
 
 
 
+## Gallery will be named Region

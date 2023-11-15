@@ -13,15 +13,15 @@ class Kitchen
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null;    
 
     #[ORM\Column(length: 255)]
-    private ?string $Meal_name = null;
+    private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'kitchen', targetEntity: Meal::class)]
     private Collection $category;
 
-    #[ORM\OneToOne(mappedBy: 'category', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'category', targetEntity:Member::class, cascade: ['persist', 'remove'])]
     private ?Member $member = null;
 
     public function __construct()
@@ -34,14 +34,14 @@ class Kitchen
         return $this->id;
     }
 
-    public function getKitchenName(): ?string
+    public function getName(): ?string
     {
-        return $this->Meal_name;
+        return $this->name;
     }
 
-    public function setKitchenName(string $Meal_name): static
+    public function setName(string $name): static
     {
-        $this->Meal_name = $Meal_name;
+        $this->name = $name;
 
         return $this;
     }

@@ -1,0 +1,23 @@
+{% block body %}
+    <h1>Meal Details</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ meal.id }}</td>
+            </tr>
+            <tr>
+                <th>Meal Name</th>
+                <td>{{ meal.Name }}</td>
+            </tr>
+            <tr>
+                <th>Meal description</th>
+                <td>{{ meal.Description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('kitchen_show', {'id': meal.kitchen.id}) }}">Back to kitchen</a>
+
+{% endblock %}

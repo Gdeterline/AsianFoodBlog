@@ -1,0 +1,27 @@
+{% block body %}
+    <h1>Kitchen Details</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ kitchen.id }}</td>
+            </tr>
+            <tr>
+                <th>Kitchen Name</th>
+                <td>{{ kitchen.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Meals in this Kitchen</h2>
+    <ul>
+        {% for meal in kitchen.category %}
+            <li>
+                <a href="{{ path('meal_show', {'id': meal.id}) }}">{{ meal.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('kitchen_index') }}">Back to List</a>
+{% endblock %}
